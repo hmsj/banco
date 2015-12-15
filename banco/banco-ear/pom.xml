@@ -36,10 +36,10 @@
 							<artifactId>banco-model</artifactId>
 						</jarModule>
 						<!-- 4.5.2. Include EJB Module. -->
-						<!-- <ejbModule>
+						 <ejbModule>
 							<groupId>es.uc3m.tiw.ejb</groupId>
 							<artifactId>banco-ejb</artifactId>
-						</ejbModule> -->
+						</ejbModule> 
 						<!-- 4.5.3. Include Web Application Module. -->
 						<webModule>
 							<groupId>es.uc3m.tiw.web</groupId>
@@ -63,19 +63,21 @@
 			<groupId>es.uc3m.tiw.model</groupId>
 			<artifactId>banco-model</artifactId>
 			<version>${project.parent.version}</version>
-			<type>jar</type>
+			<scope>provided</scope>
 		</dependency>
-		<!-- <dependency>
+		<dependency>
 			<groupId>es.uc3m.tiw.ejb</groupId>
 			<artifactId>banco-ejb</artifactId>
 			<version>${project.parent.version}</version>
 			<type>ejb</type>
-		</dependency> -->
+			<scope>provided</scope>
+		</dependency>
 		<dependency>
 			<groupId>es.uc3m.tiw.web</groupId>
 			<artifactId>banco-web</artifactId>
 			<version>${project.parent.version}</version>
 			<type>war</type>
+			<scope>provided</scope>
 		</dependency>
 	</dependencies>
 </project>

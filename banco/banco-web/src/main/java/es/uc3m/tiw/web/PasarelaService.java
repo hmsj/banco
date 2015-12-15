@@ -29,9 +29,6 @@ import es.uc3m.tiw.model.*;
  */
 @Path("pasarela")
 public class PasarelaService {
-    
-    @Context
-    private UriInfo context;
 
     @EJB
 	private GestionadorCobro gestionadorCobro;
@@ -42,8 +39,8 @@ public class PasarelaService {
         // TODO Auto-generated constructor stub
     }
 
-    @POST
-	@Path("pagoMatricula/{importe}/{codigoTarjeta}/{codigoPedido}/{fechaPedido}/xml")
+    @GET
+	@Path("pagoMatricula/{importe}/{codigoTarjeta}/{codigoPedido}/{fechaPedido}")
 	@Consumes(MediaType.TEXT_PLAIN)
 	@Produces(MediaType.TEXT_PLAIN)
 	public String PagoMatricula(@PathParam("codigoTarjeta") String codigoTarjeta,
