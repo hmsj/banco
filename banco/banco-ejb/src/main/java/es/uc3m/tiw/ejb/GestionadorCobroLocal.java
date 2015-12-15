@@ -1,5 +1,7 @@
 package es.uc3m.tiw.ejb;
 
+import java.sql.Date;
+
 import javax.ejb.Local;
 
 import es.uc3m.tiw.model.Pedido;
@@ -9,8 +11,8 @@ public interface GestionadorCobroLocal {
 
 	public String generarCodigoPago();
 
-	public Pedido generarCobro(String codigoTarjeta, String codigoPedido,
-			double importe);
+	public String generarCobro(String codigoTarjeta, String codigoPedido,
+			double importe, Date fechaPedido);
 
 	
 }
