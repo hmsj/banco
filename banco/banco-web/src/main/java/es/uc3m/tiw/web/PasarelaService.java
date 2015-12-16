@@ -54,15 +54,15 @@ public class PasarelaService {
     }
 
     @GET
-	@Path("pagoMatricula/{importe}/{codigoTarjeta}/{codigoPedido}/xml")
+	@Path("pagoMatricula/{importe}/{codigoTarjeta}/{codigoPedido}/{fechaPedido}/xml")
 	@Consumes(MediaType.TEXT_PLAIN)
 	@Produces(MediaType.TEXT_PLAIN)
 	public String PagoMatricula(@PathParam("importe") Double importe, @PathParam("codigoTarjeta") String codigoTarjeta,
-			@PathParam("codigoPedido") String codigoPedido) {
+			@PathParam("codigoPedido") String codigoPedido, @PathParam("fechaPedido") Date fechaPedido) {
     	
 		String codigoOperacion = "";
 		
-		codigoOperacion = gestionadorCobro.generarCobro(codigoTarjeta, codigoPedido, importe);
+		codigoOperacion = gestionadorCobro.generarCobro(codigoTarjeta, codigoPedido, importe, fechaPedido);
 		
 		return codigoOperacion;
 		

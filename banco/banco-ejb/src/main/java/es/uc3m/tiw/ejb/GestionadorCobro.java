@@ -40,20 +40,17 @@ public class GestionadorCobro {
     }
     
   	public String generarCobro(String codigoTarjeta, String codigoPedido,
-  			double importe) {
+  			double importe, java.sql.Date fechaPedido) {
   		// TODO Auto-generated method stub
     	pedidoDao = new PedidoDao(em);
 
     	String codigoOperacion = "";
     	Pedido nuevoPedido = null;
     	Pedido pedidoCreated = null;
-  		if(codigoTarjeta!=null && !"".equalsIgnoreCase(codigoTarjeta) && codigoPedido!=null && !"".equalsIgnoreCase(codigoPedido) && importe>0){
+  		if(codigoTarjeta!=null && !"".equalsIgnoreCase(codigoTarjeta) && codigoPedido!=null && !"".equalsIgnoreCase(codigoPedido) && importe>0 && fechaPedido!=null){
   			codigoOperacion = generarCodigoPago();
-  			Date fechaActual = new Date();
-  			java.sql.Date fechaPedido = new java.sql.Date(fechaActual.getTime());
   			if(codigoOperacion!=null && !"".equalsIgnoreCase(codigoOperacion)){
   				nuevoPedido = new Pedido(codigoPedido, importe, codigoOperacion, codigoTarjeta, fechaPedido);
-  				
   				try {
 					pedidoCreated = pedidoDao.createPedido(nuevoPedido);
 				} catch (Exception e) {
@@ -62,9 +59,8 @@ public class GestionadorCobro {
 				}
   				
   				if (pedidoCreated != null){
-  					codigoOperacion = pedidoCreated.getCodigoOperacion();
-  				}else{
-  					codigoOperacion ="";
+  					String codigoBanco = pedidoCreated.getCodigoOperacion();
+  					return codigoBanco;
   				}
   			}
   		}
