@@ -4,7 +4,12 @@ package es.uc3m.tiw.web;
 
 import java.sql.Date;
 
+import javax.annotation.Resource;
 import javax.ejb.EJB;
+import javax.ejb.Stateless;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.transaction.UserTransaction;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -17,8 +22,13 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.UriInfo;
 
+import es.uc3m.tiw.daos.ConciliacionEmpresaDao;
+import es.uc3m.tiw.daos.ConciliacionProfesorDao;
+import es.uc3m.tiw.daos.IConciliacionEmpresaDao;
+import es.uc3m.tiw.daos.IConciliacionProfesorDao;
+import es.uc3m.tiw.daos.IPedidoDao;
+import es.uc3m.tiw.daos.PedidoDao;
 import es.uc3m.tiw.ejb.GestionadorCobro;
-import es.uc3m.tiw.ejb.GestionadorCobroLocal;
 import es.uc3m.tiw.model.*;
 /**
  * La url de acceso sera: 
@@ -29,10 +39,13 @@ import es.uc3m.tiw.model.*;
  *
  */
 @Path("pasarela")
+@Stateless
 public class PasarelaService {
 
     @EJB
-	private GestionadorCobroLocal gestionadorCobro;
+	private GestionadorCobro gestionadorCobro;
+    
+   
     /**
      * Default constructor. 
      */
@@ -41,16 +54,16 @@ public class PasarelaService {
     }
 
     @GET
-	@Path("pagoMatricula/{importe}/{codigoTarjeta}/{codigoPedido}/{fechaPedido}")
+	@Path("pagoMatricula/{importe}/{codigoTarjeta}/{codigoPedido}/xml")
 	@Consumes(MediaType.TEXT_PLAIN)
 	@Produces(MediaType.TEXT_PLAIN)
 	public String PagoMatricula(@PathParam("importe") Double importe, @PathParam("codigoTarjeta") String codigoTarjeta,
-			@PathParam("codigoPedido") String codigoPedido, @PathParam("fechaPedido") Date fechaPedido) {
-
+			@PathParam("codigoPedido") String codigoPedido) {
+    	
 		String codigoOperacion = "";
-
-		codigoOperacion = gestionadorCobro.generarCobro(codigoTarjeta, codigoPedido, importe, fechaPedido);
-
+		
+		codigoOperacion = gestionadorCobro.generarCobro(codigoTarjeta, codigoPedido, importe);
+		
 		return codigoOperacion;
 		
 	}

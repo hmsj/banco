@@ -14,6 +14,13 @@ public class PedidoDao implements IPedidoDao{
 		this.em = em;
 		this.ut = ut;
 	}
+	
+	
+	
+	public PedidoDao(EntityManager em) {
+		this.em = em;
+	}
+
 	@Override
 	public Pedido createPedido(Pedido pedidoNuevo) throws Exception{
 		ut.begin();

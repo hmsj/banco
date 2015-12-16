@@ -16,8 +16,7 @@ public class ApplicationConfig extends Application {
 	//Auto-generated from RESTful web service wizard
     private Set<Class<?>> getRestClasses() {
 		Set<Class<?>> resources = new java.util.HashSet<Class<?>>();
-		
-		resources.add(es.uc3m.tiw.web.PasarelaService.class);
+			resources.add(es.uc3m.tiw.web.PasarelaService.class);
 		return resources;    
     }
 }

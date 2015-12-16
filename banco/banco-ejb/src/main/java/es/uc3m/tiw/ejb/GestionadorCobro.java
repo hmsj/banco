@@ -24,23 +24,14 @@ import es.uc3m.tiw.model.Pedido;
  */
 @Stateless(mappedName = "servicioPasarela")
 @LocalBean
-public class GestionadorCobro implements GestionadorCobroLocal {
-
+public class GestionadorCobro {
+	
 	@PersistenceContext (unitName="banco-model")
 	private EntityManager em;
-	@Resource
-	private UserTransaction ut;
-	
+		
 	private IPedidoDao pedidoDao;
 	private IConciliacionEmpresaDao conciliacionEmpresaDao;
 	private IConciliacionProfesorDao conciliacionProfesorDao;
-	
-	@PostConstruct
-	private void configurador(){
-		pedidoDao = new PedidoDao(em, ut);
-		conciliacionEmpresaDao = new ConciliacionEmpresaDao(em, ut);
-		conciliacionProfesorDao = new ConciliacionProfesorDao(em, ut);
-	}
     /**
      * Default constructor. 
      */
@@ -48,33 +39,38 @@ public class GestionadorCobro implements GestionadorCobroLocal {
         // TODO Auto-generated constructor stub
     }
     
-    @Override
   	public String generarCobro(String codigoTarjeta, String codigoPedido,
-  			double importe, java.sql.Date fechaPedido) {
+  			double importe) {
   		// TODO Auto-generated method stub
+    	pedidoDao = new PedidoDao(em);
+
     	String codigoOperacion = "";
-    	Pedido nuevoPedido = new Pedido();
-    	Pedido pedidoCreado = null;
-  		if(codigoTarjeta!=null && !"".equalsIgnoreCase(codigoTarjeta) && codigoPedido!=null && !"".equalsIgnoreCase(codigoPedido) && importe>0 && fechaPedido!=null){
+    	Pedido nuevoPedido = null;
+    	Pedido pedidoCreated = null;
+  		if(codigoTarjeta!=null && !"".equalsIgnoreCase(codigoTarjeta) && codigoPedido!=null && !"".equalsIgnoreCase(codigoPedido) && importe>0){
   			codigoOperacion = generarCodigoPago();
+  			Date fechaActual = new Date();
+  			java.sql.Date fechaPedido = new java.sql.Date(fechaActual.getTime());
   			if(codigoOperacion!=null && !"".equalsIgnoreCase(codigoOperacion)){
-  				nuevoPedido.setCodigoOperacion(codigoOperacion);
-  				nuevoPedido.setCodigoPedido(codigoPedido);
-  				nuevoPedido.setCodigoTarjeta(codigoTarjeta);
-  				nuevoPedido.setFechaPedido(fechaPedido);
-  				nuevoPedido.setImporte(importe);
+  				nuevoPedido = new Pedido(codigoPedido, importe, codigoOperacion, codigoTarjeta, fechaPedido);
+  				
   				try {
-					pedidoCreado = pedidoDao.createPedido(nuevoPedido);
+					pedidoCreated = pedidoDao.createPedido(nuevoPedido);
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
-					pedidoCreado = null;
+					pedidoCreated = null;
 				}
+  				
+  				if (pedidoCreated != null){
+  					codigoOperacion = pedidoCreated.getCodigoOperacion();
+  				}else{
+  					codigoOperacion ="";
+  				}
   			}
   		}
     	return codigoOperacion;
   	}
-    
-    @Override
+
     public String generarCodigoPago() {
 		// TODO Auto-generated method stub
 		String codigoPago = null;
