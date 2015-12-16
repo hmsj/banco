@@ -15,84 +15,84 @@ public class ConciliacionProfesor implements Serializable{
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long idPedido;
-	
-	@Column(nullable=false, unique = true)
-	private String codigoPedido;
+	private Long idConciliacionProfesor;
 	
 	@Column(nullable=false)
-	private double importe;
-	
-	@Column//(nullable=false)
-	private String codigoOperacion;
+	private Integer day;
 	
 	@Column(nullable=false)
-	private String codigoTarjeta;
+	private Integer month;
 	
 	@Column(nullable=false)
-	private Date fechaPedido;
+	private Integer year;
+	
+	@Column(nullable=false)
+	private Double importe;
 
+	@Column(nullable=false)
+	private Long idProfesor;
+	
 	public ConciliacionProfesor() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public ConciliacionProfesor(String codigoPedido, double importe, String codigoOperacion,
-			String codigoTarjeta, Date fechaPedido) {
+	public ConciliacionProfesor(Integer day, Integer month, Integer year,
+			Double importe, Long idProfesor) {
 		super();
-		this.codigoPedido = codigoPedido;
+		this.day = day;
+		this.month = month;
+		this.year = year;
 		this.importe = importe;
-		this.codigoOperacion = codigoOperacion;
-		this.codigoTarjeta = codigoTarjeta;
-		this.fechaPedido = fechaPedido;
+		this.idProfesor = idProfesor;
 	}
 
-	public Long getIdPedido() {
-		return idPedido;
+	public Long getIdConciliacionProfesor() {
+		return idConciliacionProfesor;
 	}
 
-	public void setIdPedido(Long idPedido) {
-		this.idPedido = idPedido;
+	public void setIdConciliacionProfesor(Long idConciliacionProfesor) {
+		this.idConciliacionProfesor = idConciliacionProfesor;
 	}
 
-	public String getCodigoPedido() {
-		return codigoPedido;
+	public Integer getDay() {
+		return day;
 	}
 
-	public void setCodigoPedido(String codigoPedido) {
-		this.codigoPedido = codigoPedido;
+	public void setDay(Integer day) {
+		this.day = day;
 	}
 
-	public double getImporte() {
+	public Integer getMonth() {
+		return month;
+	}
+
+	public void setMonth(Integer month) {
+		this.month = month;
+	}
+
+	public Integer getYear() {
+		return year;
+	}
+
+	public void setYear(Integer year) {
+		this.year = year;
+	}
+
+	public Double getImporte() {
 		return importe;
 	}
 
-	public void setImporte(double importe) {
+	public void setImporte(Double importe) {
 		this.importe = importe;
 	}
 
-	public String getCodigoOperacion() {
-		return codigoOperacion;
+	public Long getIdProfesor() {
+		return idProfesor;
 	}
 
-	public void setCodigoOperacion(String codigoOperacion) {
-		this.codigoOperacion = codigoOperacion;
-	}
-
-	public String getCodigoTarjeta() {
-		return codigoTarjeta;
-	}
-
-	public void setCodigoTarjeta(String codigoTarjeta) {
-		this.codigoTarjeta = codigoTarjeta;
-	}
-
-	public Date getFechaPedido() {
-		return fechaPedido;
-	}
-
-	public void setFechaPedido(Date fechaPedido) {
-		this.fechaPedido = fechaPedido;
+	public void setIdProfesor(Long idProfesor) {
+		this.idProfesor = idProfesor;
 	}
 	
 }

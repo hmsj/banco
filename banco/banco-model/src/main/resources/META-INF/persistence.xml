@@ -3,8 +3,8 @@
 	<persistence-unit name="banco-model">
 		<jta-data-source>jdbc/tiwBanco</jta-data-source>
 		<class>es.uc3m.tiw.model.ConciliacionEmpresa</class>
-		<class>es.uc3m.tiw.model.ConciliacionProfesor</class>
 		<class>es.uc3m.tiw.model.Pedido</class>
+		<class>es.uc3m.tiw.model.ConciliacionProfesor</class>
 		<properties>
 			<property name="javax.persistence.schema-generation.database.action" value="drop-and-create"/>
 		</properties>

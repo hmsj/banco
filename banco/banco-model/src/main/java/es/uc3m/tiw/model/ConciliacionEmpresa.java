@@ -26,17 +26,20 @@ public class ConciliacionEmpresa implements Serializable{
 	@Column(nullable=false)
 	private Integer year;
 	
+	@Column(nullable=false)
+	private Double importe;
 
 	public ConciliacionEmpresa() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public ConciliacionEmpresa(Integer day, Integer month, Integer year) {
+	public ConciliacionEmpresa(Integer day, Integer month, Integer year, Double importe) {
 		super();
 		this.day = day;
 		this.month = month;
 		this.year = year;
+		this.importe = importe;
 	}
 
 	public Long getIdConciliacionEmpresa() {
@@ -71,4 +74,11 @@ public class ConciliacionEmpresa implements Serializable{
 		this.year = year;
 	}
 	
+	public Double getImporte() {
+		return importe;
+	}
+
+	public void setImporte(Double importe) {
+		this.importe = importe;
+	}
 }

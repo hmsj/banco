@@ -14,6 +14,10 @@ public class ConciliacionProfesorDao implements IConciliacionProfesorDao{
 		this.em = em;
 		this.ut = ut;
 	}
+	
+	public ConciliacionProfesorDao(EntityManager em) {
+		this.em = em;
+	}
 
 	@Override
 	public ConciliacionProfesor createConciliacionProfesor(

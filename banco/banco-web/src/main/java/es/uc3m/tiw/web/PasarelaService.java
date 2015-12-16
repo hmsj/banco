@@ -31,10 +31,7 @@ import es.uc3m.tiw.daos.PedidoDao;
 import es.uc3m.tiw.ejb.GestionadorCobro;
 import es.uc3m.tiw.model.*;
 /**
- * La url de acceso sera: 
- * Para getText() -- http://localhost:8080/banco/pasarela/prueba 
- * Para getDatos() -- http://localhost:8080/resources/pasarela/prueba/23/david 
-
+ *
  * @author Henar Mata
  *
  */
@@ -65,8 +62,33 @@ public class PasarelaService {
 		codigoOperacion = gestionadorCobro.generarCobro(codigoTarjeta, codigoPedido, importe, fechaPedido);
 		
 		return codigoOperacion;
-		
 	}
     
-
+    @GET
+   	@Path("conciliacionEmpresa/{day}/{month}/{year}/{importe}/xml")
+   	@Consumes(MediaType.TEXT_PLAIN)
+   	@Produces(MediaType.TEXT_PLAIN)
+   	public ConciliacionEmpresa DoConciliacionEmpresa(@PathParam("day") Integer day, @PathParam("month") Integer month,
+   			@PathParam("year") Integer year, @PathParam("importe") Double importe) {
+       	
+   		ConciliacionEmpresa conEmpresa = null;
+   		
+   		conEmpresa = gestionadorCobro.generarConciliacionEmpresa(day, month, year, importe);
+   		
+   		return conEmpresa;
+   	}
+    
+    @GET
+   	@Path("conciliacionEmpresa/{day}/{month}/{year}/{importe}/{idProfesor}/xml")
+   	@Consumes(MediaType.TEXT_PLAIN)
+   	@Produces(MediaType.TEXT_PLAIN)
+   	public ConciliacionProfesor DoConciliacionProfesor(@PathParam("day") Integer day, @PathParam("month") Integer month,
+   			@PathParam("year") Integer year, @PathParam("importe") Double importe, @PathParam("idProfesor") Long idProfesor) {
+       	
+   		ConciliacionProfesor conProfesor = null;
+   		
+   		conProfesor = gestionadorCobro.generarConciliacionProfesor(day, month, year, importe, idProfesor);
+   		
+   		return conProfesor;
+   	}
 }

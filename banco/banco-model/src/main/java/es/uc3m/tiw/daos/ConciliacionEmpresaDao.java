@@ -16,6 +16,10 @@ public class ConciliacionEmpresaDao implements IConciliacionEmpresaDao{
 		this.ut = ut;
 	}
 
+	public ConciliacionEmpresaDao(EntityManager em) {
+		this.em = em;
+	}
+	
 	@Override
 	public ConciliacionEmpresa createConciliacionEmpresa(
 			ConciliacionEmpresa conciliacionEmpresaNueva) throws Exception {
