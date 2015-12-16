@@ -18,6 +18,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.UriInfo;
 
 import es.uc3m.tiw.ejb.GestionadorCobro;
+import es.uc3m.tiw.ejb.GestionadorCobroLocal;
 import es.uc3m.tiw.model.*;
 /**
  * La url de acceso sera: 
@@ -31,7 +32,7 @@ import es.uc3m.tiw.model.*;
 public class PasarelaService {
 
     @EJB
-	private GestionadorCobro gestionadorCobro;
+	private GestionadorCobroLocal gestionadorCobro;
     /**
      * Default constructor. 
      */
@@ -43,16 +44,15 @@ public class PasarelaService {
 	@Path("pagoMatricula/{importe}/{codigoTarjeta}/{codigoPedido}/{fechaPedido}")
 	@Consumes(MediaType.TEXT_PLAIN)
 	@Produces(MediaType.TEXT_PLAIN)
-	public String PagoMatricula(@PathParam("codigoTarjeta") String codigoTarjeta,
-			@PathParam("codigoPedido") String codigoPedido,
-			@PathParam("importe") double importe, @PathParam("fechaPedido") Date fechaPedido) {
+	public String PagoMatricula(@PathParam("importe") Double importe, @PathParam("codigoTarjeta") String codigoTarjeta,
+			@PathParam("codigoPedido") String codigoPedido, @PathParam("fechaPedido") Date fechaPedido) {
 
-		String codigoOperacion = null;
+		String codigoOperacion = "";
 
 		codigoOperacion = gestionadorCobro.generarCobro(codigoTarjeta, codigoPedido, importe, fechaPedido);
 
 		return codigoOperacion;
-
+		
 	}
     
 
